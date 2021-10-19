@@ -1,0 +1,57 @@
+.page__heading {
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 3.25rem;
+}
+
+.product-overview {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-overview__average-score-section {
+    display: flex;
+    align-items: center;
+}
+
+.product-overview__average-score {
+    font-size: 2.75rem;
+    line-height: 3.25rem;
+    margin-right: 1.2rem;
+}
+
+.product-overview__star {
+    margin: 0 0.15rem;
+}
+
+.hr {
+    margin-top: 4.31rem;
+    margin-bottom: 2.56rem;
+    border: 1px solid #b9b9b9;
+}
+
+.page__reviews-heading {
+    margin-bottom: 1.3rem;
+}
+
+.review {
+    display: flex;
+    align-items: center;
+
+    margin: 0.9rem 0rem;
+}
+
+.review__stars {
+    margin-right: 1.813rem;
+}
+
+.review__score-text {
+    font-size: 1.25rem;
+    line-height: 1.438rem;
+    color: #858585;
+}
+
+.review__score-number {
+    color: #000;
+    font-weight: 700;
+}

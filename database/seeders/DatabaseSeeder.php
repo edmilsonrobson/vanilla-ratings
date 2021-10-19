@@ -17,20 +17,30 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Product::factory()
-            ->create();
-
-        Product::factory()
-            ->count(3)
             ->has(
                 ProductReview::factory([
-                    'user_id' => null
+                    'user_id' => null,
+                    'rating' => 4.0,
+                    'review_text' => 'book was full of fluff',
                 ])
-                    ->count(2)
             )
-            ->create();
-
-        User::factory()
-            ->count(3)
+            ->has(
+                ProductReview::factory([
+                    'user_id' => null,
+                    'rating' => 3.0,
+                    'review_text' => 'book was fluff',
+                ])
+            )
+            ->has(
+                ProductReview::factory([
+                    'user_id' => null,
+                    'rating' => 4.0,
+                    'review_text' => 'book was amazing',
+                ])
+            )
+            ->state([
+                'name' => 'The Minimalist Entrepreneur'
+            ])
             ->create();
     }
 }
