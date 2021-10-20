@@ -2065,6 +2065,85 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/api.js":
+/*!*****************************!*\
+  !*** ./resources/js/api.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchProduct": () => (/* binding */ fetchProduct),
+/* harmony export */   "createProductReview": () => (/* binding */ createProductReview)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var fetchProduct = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(id) {
+    var _yield$axios$get, data;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/products/".concat(id));
+
+          case 2:
+            _yield$axios$get = _context.sent;
+            data = _yield$axios$get.data;
+            return _context.abrupt("return", data);
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function fetchProduct(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var createProductReview = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(reviewData) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/product-reviews", {
+              productId: reviewData.productId,
+              rating: reviewData.rating,
+              reviewText: reviewData.reviewText
+            });
+
+          case 2:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function createProductReview(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -3112,8 +3191,7 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api */ "./resources/js/api.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3121,26 +3199,112 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
+var product = undefined;
+var addReviewButton = document.getElementById("add-review-button");
+var addReviewModal = document.getElementById("add-review-modal");
+var averageScore = document.getElementById("product-average-score");
+var productName = document.getElementById("product-name");
+var averageScoreStarsSection = document.getElementById("average-score-stars-section");
+var reviewTextArea = document.getElementById("review-text-area");
+var submitReviewButton = document.getElementById("submit-review-button");
+var reviewsSection = document.getElementById("reviews-section");
+var ratingFormRadioStars = [document.getElementById("1star"), document.getElementById("2star"), document.getElementById("3star"), document.getElementById("4star"), document.getElementById("5star")];
+var ratingFormRadioStarImgs = [document.getElementById("1star-img"), document.getElementById("2star-img"), document.getElementById("3star-img"), document.getElementById("4star-img"), document.getElementById("5star-img")];
 
-var fetchProduct = /*#__PURE__*/function () {
+var fillStars = function fillStars(rating, root) {
+  for (var i = 0; i < Math.floor(rating); i++) {
+    var starImg = document.createElement("img");
+    starImg.src = "/svg/full-star.svg";
+    root.appendChild(starImg);
+  }
+
+  for (var _i = Math.floor(rating); _i < 5; _i++) {
+    var _starImg = document.createElement("img");
+
+    _starImg.src = "/svg/empty-star.svg";
+    root.appendChild(_starImg);
+  }
+};
+
+var addReview = function addReview(review) {
+  var reviewDiv = document.createElement("div");
+  reviewDiv.className = "review";
+  var reviewStarsDiv = document.createElement("div");
+  reviewStarsDiv.className = "review__stars";
+  reviewDiv.appendChild(reviewStarsDiv);
+  fillStars(review.rating, reviewStarsDiv);
+  var reviewScoreText = document.createElement("div");
+  reviewScoreText.className = "review__score-text";
+  var reviewScoreNumber = document.createElement("span");
+  reviewScoreNumber.innerHTML = review.rating;
+  reviewScoreNumber.className = "review__score-number";
+  var reviewText = document.createElement("span");
+  reviewText.innerHTML = ", " + review.review_text;
+  reviewScoreText.appendChild(reviewScoreNumber);
+  reviewScoreText.appendChild(reviewText);
+  reviewDiv.appendChild(reviewScoreText);
+  reviewsSection.appendChild(reviewDiv);
+};
+
+var fillReviewsState = function fillReviewsState() {
+  var _product = product,
+      productReviews = _product.product_reviews;
+  reviewsSection.innerHTML = "";
+  productReviews.forEach(function (review) {
+    return addReview(review);
+  });
+};
+
+var updateProductState = function updateProductState() {
+  productName.innerText = product.name;
+  var averageScoreValue = product.product_reviews_avg_rating.toFixed(1) || 0;
+  averageScore.innerText = averageScoreValue;
+  fillStars(averageScoreValue, averageScoreStarsSection);
+  fillReviewsState();
+};
+
+var openReviewModal = function openReviewModal() {
+  addReviewModal.classList.remove("hidden");
+};
+
+var closeReviewModal = function closeReviewModal() {
+  addReviewModal.classList.add("hidden");
+};
+
+var handleAddReviewButtonClick = function handleAddReviewButtonClick() {
+  openReviewModal();
+};
+
+var setSubmitReviewButtonLoading = function setSubmitReviewButtonLoading(value) {
+  submitReviewButton.disabled = value;
+};
+
+var handleSubmitReviewButtonClick = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-    var _yield$axios$get, product;
-
+    var rating, reviewText;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/products/1");
-
-          case 2:
-            _yield$axios$get = _context.sent;
-            product = _yield$axios$get.data;
-            console.log({
-              product: product
+            rating = document.querySelector('input[name="rating"]:checked').value;
+            reviewText = reviewTextArea.value;
+            setSubmitReviewButtonLoading(true);
+            _context.next = 5;
+            return (0,_api__WEBPACK_IMPORTED_MODULE_1__.createProductReview)({
+              productId: 1,
+              rating: rating,
+              reviewText: reviewText
             });
 
           case 5:
+            _context.next = 7;
+            return getRemoteProduct();
+
+          case 7:
+            closeReviewModal();
+            setSubmitReviewButtonLoading(false);
+
+          case 9:
           case "end":
             return _context.stop();
         }
@@ -3148,12 +3312,70 @@ var fetchProduct = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function fetchProduct() {
+  return function handleSubmitReviewButtonClick() {
     return _ref.apply(this, arguments);
   };
 }();
 
-fetchProduct();
+var handleRadioStarChange = function handleRadioStarChange(value) {
+  return function () {
+    var fullStarPath = "/svg/full-star.svg";
+    var emptyStarPath = "/svg/empty-star.svg";
+
+    for (var i = 0; i < value; i++) {
+      ratingFormRadioStarImgs[i].src = fullStarPath;
+    }
+
+    for (var _i2 = value; _i2 < 5; _i2++) {
+      ratingFormRadioStarImgs[_i2].src = emptyStarPath;
+    }
+  };
+};
+
+var setupEventHandlers = function setupEventHandlers() {
+  addReviewButton.addEventListener("click", handleAddReviewButtonClick);
+  submitReviewButton.addEventListener("click", handleSubmitReviewButtonClick);
+  ratingFormRadioStars.forEach(function (radioStar) {
+    return radioStar.addEventListener("change", handleRadioStarChange(radioStar.value));
+  });
+};
+
+var getRemoteProduct = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    var productId;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            productId = 1;
+            _context2.next = 3;
+            return (0,_api__WEBPACK_IMPORTED_MODULE_1__.fetchProduct)(productId);
+
+          case 3:
+            product = _context2.sent;
+            updateProductState();
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function getRemoteProduct() {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+setupEventHandlers();
+getRemoteProduct();
+
+window.onclick = function (event) {
+  if (event.target === addReviewModal) {
+    closeReviewModal();
+  }
+};
 })();
 
 /******/ })()

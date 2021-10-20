@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'show']);
 Route::get('/products/{productId}', [ProductController::class, 'getProduct']);
+
+Route::post('/product-reviews', [ProductReviewController::class, 'store']);
