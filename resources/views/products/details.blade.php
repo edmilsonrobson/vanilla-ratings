@@ -11,6 +11,7 @@
 <section class="product-overview">
   <div id="average-score-stars-section" class="product-overview__average-score-section">
     <span id="product-average-score" class="product-overview__average-score">3.8</span>
+    <div id="average-score-stars-div"" class=" product-overview__average-score-stars"></div>
     <!-- <img src="/svg/full-star.svg" alt="">
     <img src="/svg/full-star.svg" alt="">
     <img src="/svg/full-star.svg" alt="">

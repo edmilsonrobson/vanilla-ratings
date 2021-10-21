@@ -3204,7 +3204,7 @@ var addReviewButton = document.getElementById("add-review-button");
 var addReviewModal = document.getElementById("add-review-modal");
 var averageScore = document.getElementById("product-average-score");
 var productName = document.getElementById("product-name");
-var averageScoreStarsSection = document.getElementById("average-score-stars-section");
+var averageScoreStarsDiv = document.getElementById("average-score-stars-div");
 var reviewTextArea = document.getElementById("review-text-area");
 var submitReviewButton = document.getElementById("submit-review-button");
 var reviewsSection = document.getElementById("reviews-section");
@@ -3259,7 +3259,8 @@ var updateProductState = function updateProductState() {
   productName.innerText = product.name;
   var averageScoreValue = product.product_reviews_avg_rating.toFixed(1) || 0;
   averageScore.innerText = averageScoreValue;
-  fillStars(averageScoreValue, averageScoreStarsSection);
+  averageScoreStarsDiv.innerHTML = "";
+  fillStars(averageScoreValue, averageScoreStarsDiv);
   fillReviewsState();
 };
 

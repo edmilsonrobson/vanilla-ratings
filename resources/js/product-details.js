@@ -6,9 +6,7 @@ const addReviewButton = document.getElementById("add-review-button");
 const addReviewModal = document.getElementById("add-review-modal");
 const averageScore = document.getElementById("product-average-score");
 const productName = document.getElementById("product-name");
-const averageScoreStarsSection = document.getElementById(
-    "average-score-stars-section"
-);
+const averageScoreStarsDiv = document.getElementById("average-score-stars-div");
 
 const reviewTextArea = document.getElementById("review-text-area");
 const submitReviewButton = document.getElementById("submit-review-button");
@@ -87,7 +85,8 @@ const updateProductState = () => {
         product.product_reviews_avg_rating.toFixed(1) || 0;
     averageScore.innerText = averageScoreValue;
 
-    fillStars(averageScoreValue, averageScoreStarsSection);
+    averageScoreStarsDiv.innerHTML = "";
+    fillStars(averageScoreValue, averageScoreStarsDiv);
     fillReviewsState();
 };
 
